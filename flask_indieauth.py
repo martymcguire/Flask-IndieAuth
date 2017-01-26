@@ -19,7 +19,6 @@
 
     Example Usage
     -------------
-
     
         from flask_indieauth import requires_indieauth
         @app.route('/micropub', methods=['GET','POST'])
@@ -42,9 +41,19 @@
 
 from functools import wraps
 from flask import request, Response, current_app, g
-from urllib2 import Request, urlopen
-from urlparse import urlparse, parse_qs
 import json
+try:
+    # For Python 3.0 and later
+    from urllib.request import Request, urlopen
+except ImportError:
+    # Fallback to Python2 urllib2
+    from urllib2 import Request, urlopen
+try:
+    # Python 3.0
+    from urllib.parse import urlparse, parse_qs
+except ImportError:
+    # Fallback to Python2 urlparse
+    from urlparse import urlparse, parse_qs
 
 def requires_indieauth(f):
     """Wraps a Flask handler to require a valid IndieAuth access token.
@@ -69,7 +78,7 @@ def check_auth(access_token):
       current_app.config['TOKEN_ENDPOINT'],
       headers={"Authorization" : ("Bearer %s" % access_token)}
     )
-    contents = urlopen(request).read()
+    contents = urlopen(request).read().decode('utf-8')
     token_data = parse_qs(contents)
     me = token_data['me'][0]
     client_id = token_data['client_id'][0]
