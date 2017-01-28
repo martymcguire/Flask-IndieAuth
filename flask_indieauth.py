@@ -99,7 +99,8 @@ def check_auth(access_token):
     g.user = {
       'me': me,
       'client_id': client_id,
-      'scope': scope
+      'scope': scope,
+      'access_token': access_token
     }
 
 def check_me(me):
