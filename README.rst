@@ -3,10 +3,10 @@ Flask-IndieAuth
 ===============
 
 This extension adds the ability to authorize requests to your Flask
-endpoints via IndieAuth <https://indieweb.org/IndieAuth>, using
+endpoints via `IndieAuth <https://indieweb.org/IndieAuth>`_, using
 ``current_app.config['TOKEN_ENDPOINT']`` as the token server.
 
-This is useful for developers of Micropub <https://www.w3.org/TR/micropub/>
+This is useful for developers of `Micropub <https://www.w3.org/TR/micropub/>`_
 server implementations.
 
 Configuration
@@ -41,7 +41,7 @@ Access Token Contents
 ---------------------
 
 Upon successful authentication/authorization, Flask-IndieAuth will store
-a ``user`` dict in Flask.g <http://flask.pocoo.org/docs/0.12/api/#flask.g> with
+a ``user`` dict in `Flask.g <http://flask.pocoo.org/docs/0.12/api/#flask.g>`_ with
 the following attributes:
 
 :``me``: the homepage that the user logged in as
