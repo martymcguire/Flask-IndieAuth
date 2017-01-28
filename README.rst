@@ -58,4 +58,4 @@ the following attributes:
     @requires_indieauth
     def handle_micropub():
         user = g.user
-        current_app.logger.info("Request from %s" % user.me)
+        current_app.logger.info("Request from %s" % user["me"])
