@@ -1,5 +1,6 @@
 Flask-IndieAuth
-==============
+===============
+
 This extension adds the ability to authorize requests to your Flask
 endpoints via [IndieAuth](https://indieweb.org/IndieAuth), using
 current_app.config['TOKEN_ENDPOINT'] as the token server.
@@ -18,7 +19,6 @@ Configuration
 Example Usage
 -------------
 
-
     from flask_indieauth import requires_indieauth
     @app.route('/micropub', methods=['GET','POST'])
     @requires_indieauth
@@ -36,3 +36,25 @@ If an access token is found, it is checked for a `me` value equal to the
 domain in current_app.config["ME"] and a `scope` value of `post`.
 
 If all checks pass, processing is passed to the Flask route handler.
+
+### Access Token Contents
+
+Upon successful authentication/authorization, Flask-IndieAuth will store
+a `user` dict in [Flask.g](http://flask.pocoo.org/docs/0.12/api/#flask.g) with
+the following attributes:
+
+* `me` - the homepage that the user logged in as
+* `scope` - the authorization scope of this token
+* `client_id` - typically the homepage for the micropub client
+* `access_token` - the raw access token
+
+#### Example Usage
+
+    from flask import g, current_app
+
+    from flask_indieauth import requires_indieauth
+    @app.route('/micropub', methods=['GET','POST'])
+    @requires_indieauth
+    def handle_micropub():
+        user = g.user
+        current_app.logger.info("Request from %s" % user.me)
