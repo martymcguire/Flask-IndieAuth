@@ -17,10 +17,8 @@ Configuration
 :``TOKEN_ENDPONT``: (e.g. "https://tokens.indieauth.org/token")
 :``ME``: (e.g. "http://example.com")
 
-Example Usage
-=============
+**Example Usage**::
 
-::
     from flask_indieauth import requires_indieauth
     @app.route('/micropub', methods=['GET','POST'])
     @requires_indieauth
