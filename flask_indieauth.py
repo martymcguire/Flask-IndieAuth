@@ -34,7 +34,7 @@
     * HTTP POST body, if in JSON format, in the `access_token` attribute
 
     If an access token is found, it is checked for a `me` value equal to the
-    domain in current_app.config["ME"] and a `scope` value of `post`.
+    domain in current_app.config["ME"] and a `scope` value of `post` or `create`.
 
     If all checks pass, processing is passed to the Flask route handler.
 """
@@ -92,9 +92,9 @@ def check_auth(access_token):
         return deny(me_error)
 
     scope = token_data['scope'][0]
-    if "post" not in token_data['scope']:
-        current_app.logger.error("Scope %s does not contain 'post'." % scope)
-        return deny("Scope %s does not contain 'post'." % scope)
+    if token_data['scope'] not in ["post", "create"]:
+        current_app.logger.error("Scope %s does not contain 'post' or 'create'." % scope)
+        return deny("Scope %s does not contain 'post' or 'create'." % scope)
 
     g.user = {
       'me': me,
