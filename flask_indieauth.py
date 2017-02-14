@@ -91,10 +91,15 @@ def check_auth(access_token):
         current_app.logger.error("Invalid `me` value [%s]" % me_error)
         return deny(me_error)
 
-    scope = token_data['scope'][0]
-    if token_data['scope'] not in ["post", "create"]:
-        current_app.logger.error("Scope %s does not contain 'post' or 'create'." % scope)
-        return deny("Scope %s does not contain 'post' or 'create'." % scope)
+    scope = token_data['scope']
+    if not isinstance(scope, basestring):
+        scope = scope[0]
+    valid_scopes = ('post','create', )
+    valid_scope = (len([val for val in valid_scopes if val in scope]) > 0)
+
+    if not valid_scope:
+        current_app.logger.error("Scope '%s' does not contain 'post' or 'create'." % scope)
+        return deny("Scope '%s' does not contain 'post' or 'create'." % scope)
 
     g.user = {
       'me': me,
