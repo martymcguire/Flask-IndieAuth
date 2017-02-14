@@ -8,7 +8,7 @@ from setuptools import setup
 
 setup(
     name='Flask-IndieAuth',
-    version='0.0.3',
+    version='0.0.3.1',
     url='https://github.com/martymcguire/flask-indieauth/',
     license='MIT',
     author='Marty McGuire',
