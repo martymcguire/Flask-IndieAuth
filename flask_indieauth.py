@@ -92,7 +92,7 @@ def check_auth(access_token):
         return deny(me_error)
 
     scope = token_data['scope']
-    if not isinstance(scope, basestring):
+    if not isinstance(scope, str):
         scope = scope[0]
     valid_scopes = ('post','create', )
     valid_scope = (len([val for val in valid_scopes if val in scope]) > 0)
