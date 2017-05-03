@@ -14,7 +14,7 @@ Configuration
 
 ``current_app.config`` should contain the following configuration details:
 
-:``TOKEN_ENDPONT``: (e.g. "https://tokens.indieauth.org/token")
+:``TOKEN_ENDPOINT``: (e.g. "https://tokens.indieauth.com/token")
 :``ME``: (e.g. "http://example.com")
 
 **Example Usage**::
