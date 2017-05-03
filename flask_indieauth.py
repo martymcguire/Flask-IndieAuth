@@ -95,9 +95,10 @@ def check_auth(access_token):
     if not isinstance(scope, str):
         scope = scope[0]
     valid_scopes = ('post','create', )
-    valid_scope = (len([val for val in valid_scopes if val in scope]) > 0)
+    scope_ = scope.split()
+    scope_valid = any((val in scope_) for val in valid_scopes)
 
-    if not valid_scope:
+    if not scope_valid:
         current_app.logger.error("Scope '%s' does not contain 'post' or 'create'." % scope)
         return deny("Scope '%s' does not contain 'post' or 'create'." % scope)
 
