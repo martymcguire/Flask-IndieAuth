@@ -19,7 +19,7 @@
 
     Example Usage
     -------------
-    
+
         from flask_indieauth import requires_indieauth
         @app.route('/micropub', methods=['GET','POST'])
         @requires_indieauth
@@ -132,7 +132,7 @@ def get_access_token():
 
 def get_access_token_from_json_request(request):
     try:
-        jsondata = json.loads(request.get_data())
+        jsondata = json.loads(request.get_data(as_text=True))
         return jsondata['access_token']
     except ValueError:
         return None
